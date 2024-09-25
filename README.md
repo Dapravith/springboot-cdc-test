@@ -4,6 +4,6 @@
 
 ### Full article: https://sofienebk.medium.com/change-data-capture-made-easy-debezium-integration-with-spring-boot-mongodb-and-postgres-96dc9772bb86
 
-### Crdit Owner to: https://github.com/sofieneBK/Hands-on-debezium-cdc-with-springboot.git
+### Credit Owner to: https://github.com/sofieneBK/Hands-on-debezium-cdc-with-springboot.git
 
 Just for learning purpose.
