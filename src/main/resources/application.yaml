@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  data:
+    mongodb:
+      uri: "mongodb://localhost:27017/"  # Updated to include database name
+      database: test
+      username:      # If not using authentication, leave empty
+      password:      # If not using authentication, leave empty
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+database:
+  include:
+    list: test
+collection:
+  include:
+    list: "test.products"
+
+logging:
+  level:
+    org.mongodb: DEBUG
+    io.debezium: DEBUG

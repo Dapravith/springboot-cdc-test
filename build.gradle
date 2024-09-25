@@ -1,0 +1,61 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'spring.debezium'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '21'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot Dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Lombok for code generation
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// PostgreSQL Driver
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// Debezium dependencies, all aligned to version 2.4.0.Final
+	implementation 'io.debezium:debezium-api:2.4.0.Final'
+	implementation 'io.debezium:debezium-embedded:2.4.0.Final'
+	implementation 'io.debezium:debezium-connector-mongodb:2.4.0.Final'
+	implementation 'io.debezium:debezium-storage-jdbc:2.4.0.Final'
+
+	// MongoDB driver version compatible with Debezium and Spring Boot
+	implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
+
+	// Ensure Debezium doesn't pull an incompatible version of MongoDB driver
+	implementation('io.debezium:debezium-connector-mongodb:2.4.0.Final') {
+		exclude group: 'org.mongodb', module: 'mongodb-driver-sync'
+	}
+
+	// Adding MongoDB core driver to support compatibility
+	implementation 'org.mongodb:mongodb-driver-core:4.9.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
